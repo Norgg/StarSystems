@@ -154,3 +154,10 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+
+# =========================
+# Kerbal Space Program
+# =========================
+KSPResources/
+StarSystems.zip
+GameData/StarSystems/StarSystems.dll
