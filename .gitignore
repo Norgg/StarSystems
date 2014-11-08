@@ -158,6 +158,6 @@ $RECYCLE.BIN/
 # =========================
 # Kerbal Space Program
 # =========================
-KSPResources/
+KSPResources/*.dll
 StarSystems.zip
 GameData/StarSystems/StarSystems.dll
