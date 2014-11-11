@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\OrbitDefinition.cs" />
+    <Compile Include="Data\PlanetDefinition.cs" />
     <Compile Include="Fixes\OrbitUpdater.cs" />
     <Compile Include="Fixes\NavBallFixer.cs">
       <SubType>Code</SubType>
@@ -73,9 +75,6 @@
       <HintPath>..\KSPResources\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Config\system.cfg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

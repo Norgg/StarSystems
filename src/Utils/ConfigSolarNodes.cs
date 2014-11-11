@@ -44,7 +44,7 @@ namespace StarSystems.Utils
                 }
                 else
                 {
-                    ConfigNode kspNode = system_config.GetNode("KSPSystem");
+                    ConfigNode kspNode = GameDatabase.Instance.GetConfigNode("KSPSystem");//system_config.GetNode("KSPSystem");
                     RootDefinition rootDefinition;
                     double sun_solar_mass;
                     SunType sun_solar_type;
@@ -93,7 +93,7 @@ namespace StarSystems.Utils
 
                     starSystemDefintion.Name = sun.GetNode("CelestialBody").GetValue("name");
                     starSystemDefintion.FlightGlobalsIndex = int.Parse(sun.GetNode("CelestialBody").GetValue("flightGlobalIndex"));
-                    starSystemDefintion.SemiMajorAxis = double.Parse(sun.GetNode("Orbit").GetValue("semiMajorAxis"));
+                    starSystemDefintion.orbit.SemiMajorAxis = double.Parse(sun.GetNode("Orbit").GetValue("semiMajorAxis"));
                     try
                     {
                         starSystemDefintion.BodyDescription = sun.GetNode("CelestialBody").GetValue("BodyDescription");
@@ -140,53 +140,78 @@ namespace StarSystems.Utils
                     }
                     try
                     {
-                        starSystemDefintion.Inclination = double.Parse(sun.GetNode("Orbit").GetValue("inclination"));
+                        starSystemDefintion.orbit.Inclination = double.Parse(sun.GetNode("Orbit").GetValue("inclination"));
                     }
                     catch (Exception e)
                     {
-                        starSystemDefintion.Inclination = 0;
+                        starSystemDefintion.orbit.Inclination = 0;
                     }
                     try
                     {
-                        starSystemDefintion.Eccentricity = double.Parse(sun.GetNode("Orbit").GetValue("eccentricity"));
+                        starSystemDefintion.orbit.Eccentricity = double.Parse(sun.GetNode("Orbit").GetValue("eccentricity"));
                     }
                     catch (Exception e)
                     {
-                        starSystemDefintion.Eccentricity = 0;
+                        starSystemDefintion.orbit.Eccentricity = 0;
                     }
                     try
                     {
-                        starSystemDefintion.LAN = double.Parse(sun.GetNode("Orbit").GetValue("LAN"));
+                        starSystemDefintion.orbit.LAN = double.Parse(sun.GetNode("Orbit").GetValue("LAN"));
                     }
                     catch (Exception e)
                     {
-                        starSystemDefintion.LAN = 0;
+                        starSystemDefintion.orbit.LAN = 0;
                     }
                     try
                     {
-                        starSystemDefintion.ArgumentOfPeriapsis =
+                        starSystemDefintion.orbit.ArgumentOfPeriapsis =
                             double.Parse(sun.GetNode("Orbit").GetValue("argumentOfPeriapsis"));
                     }
                     catch (Exception e)
                     {
-                        starSystemDefintion.ArgumentOfPeriapsis = 0;
+                        starSystemDefintion.orbit.ArgumentOfPeriapsis = 0;
                     }
                     try
                     {
-                        starSystemDefintion.MeanAnomalyAtEpoch = double.Parse(sun.GetNode("Orbit").GetValue("meanAnomalyAtEpoch"));
+                        starSystemDefintion.orbit.MeanAnomalyAtEpoch = double.Parse(sun.GetNode("Orbit").GetValue("meanAnomalyAtEpoch"));
                     }
                     catch (Exception e)
                     {
-                        starSystemDefintion.MeanAnomalyAtEpoch = 0;
+                        starSystemDefintion.orbit.MeanAnomalyAtEpoch = 0;
                     }
                     try
                     {
-                        starSystemDefintion.Epoch = double.Parse(sun.GetNode("Orbit").GetValue("epoch"));
+                        starSystemDefintion.orbit.Epoch = double.Parse(sun.GetNode("Orbit").GetValue("epoch"));
                     }
                     catch (Exception e)
                     {
-                        starSystemDefintion.Epoch = 0;
+                        starSystemDefintion.orbit.Epoch = 0;
                     }
+
+                    //Planets
+                    foreach (ConfigNode planet in star.GetNodes("Planet"))
+                    {
+                        PlanetDefinition planetDef = new PlanetDefinition();
+                        planetDef.Name = planet.GetValue("name");
+                        if (planetDef.Name != null)
+                        {
+                            if (planet.GetNode("Orbit") != null)
+                            {
+                                //TODO: Implement me
+                            }
+                            else
+                            {
+                                planetDef.orbit = null;
+                                Debug.Log(planetDef.Name + " in " + starSystemDefintion.Name + " is missing orbit information, using original");
+                            }
+                            starSystemDefintion.orbitingBodies.Add(planetDef);
+                        }
+                        else
+                        {
+                            Debug.Log("A planet in " + starSystemDefintion.Name + " is missing it's name!");
+                        }
+                    }
+
                     returnValue.Add(starSystemDefintion);
                 }
                 else

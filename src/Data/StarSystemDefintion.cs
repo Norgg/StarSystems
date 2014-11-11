@@ -12,13 +12,13 @@ namespace StarSystems.Data
             this.Name = Name;
             this.BodyDescription = BodyDescription;
             this.StarColor = StarColor;
-            this.Inclination = Inclination;
-            this.Eccentricity = Eccentricity;
-            this.SemiMajorAxis = SemiMajorAxis;
-            this.LAN = LAN;
-            this.ArgumentOfPeriapsis = ArgumentOfPeriapsis;
-            this.MeanAnomalyAtEpoch = MeanAnomalyAtEpoch;
-            this.Epoch = Epoch;
+            this.orbit.Inclination = Inclination;
+            this.orbit.Eccentricity = Eccentricity;
+            this.orbit.SemiMajorAxis = SemiMajorAxis;
+            this.orbit.LAN = LAN;
+            this.orbit.ArgumentOfPeriapsis = ArgumentOfPeriapsis;
+            this.orbit.MeanAnomalyAtEpoch = MeanAnomalyAtEpoch;
+            this.orbit.Epoch = Epoch;
             this.Radius = Radius;
             this.FlightGlobalsIndex = FlightGlobalsIndex;
             this.ScienceMultiplier = ScienceMultiplier;
@@ -32,16 +32,11 @@ namespace StarSystems.Data
         public string Name { get; set; }
         public string BodyDescription { get; set; }
         public PlanetColor StarColor { get; set; }
-        public double Inclination { get; set; }
-        public double Eccentricity { get; set; }
-        public double SemiMajorAxis { get; set; }
-        public double LAN { get; set; }
-        public double ArgumentOfPeriapsis { get; set; }
-        public double MeanAnomalyAtEpoch { get; set; }
-        public double Epoch { get; set; }
+        public OrbitDefinition orbit = new OrbitDefinition();
         public double Mass { get; set; }
         public double Radius { get; set; }
         public int FlightGlobalsIndex { get; set; }
         public float ScienceMultiplier { get; set; }
+        public List<PlanetDefinition> orbitingBodies = new List<PlanetDefinition>();
     }
 }

@@ -69,8 +69,7 @@ namespace StarSystems.Creator
             LocalStarCB.orbitDriver.QueuedUpdate = true;
 
             //Create new orbit
-            LocalStarCB.orbitDriver.orbit = new Orbit(defintion.Inclination, defintion.Eccentricity, defintion.SemiMajorAxis,
-                defintion.LAN, defintion.ArgumentOfPeriapsis, defintion.MeanAnomalyAtEpoch, defintion.Epoch, LocalSunCB);
+            LocalStarCB.orbitDriver.orbit = defintion.orbit.getOrbit(LocalSunCB);
 
             //Calculate SOI
             LocalStarCB.sphereOfInfluence = (LocalStarCB.orbit.semiMajorAxis*

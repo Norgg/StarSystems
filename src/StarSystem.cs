@@ -57,13 +57,13 @@ namespace StarSystems
                     //Load Kerbol
                     var Kerbol = new StarSystemDefintion();
                     Kerbol.Name = "Kerbol";
-                    Kerbol.Inclination = 0;
-                    Kerbol.Eccentricity = 0;
-                    Kerbol.SemiMajorAxis = kspSystemDefinition.SemiMajorAxis;
-                    Kerbol.LAN = 0;
-                    Kerbol.ArgumentOfPeriapsis = 0;
-                    Kerbol.MeanAnomalyAtEpoch = 0;
-                    Kerbol.Epoch = 0;
+                    Kerbol.orbit.Inclination = 0;
+                    Kerbol.orbit.Eccentricity = 0;
+                    Kerbol.orbit.SemiMajorAxis = kspSystemDefinition.SemiMajorAxis;
+                    Kerbol.orbit.LAN = 0;
+                    Kerbol.orbit.ArgumentOfPeriapsis = 0;
+                    Kerbol.orbit.MeanAnomalyAtEpoch = 0;
+                    Kerbol.orbit.Epoch = 0;
                     Kerbol.Mass = 1.7565670E28;
                     Kerbol.Radius = 261600000d;
                     Kerbol.FlightGlobalsIndex = 200;
@@ -111,7 +111,6 @@ namespace StarSystems
                             DontDestroyOnLoad(InternalStarPSB);
                             StarDict.Add(star.Name, new Star(star, InternalStarPSB, InternalSunPSB));
                             PSBDict[InternalStarPSB.celestialBody.bodyName] = InternalStarPSB;
-
                         }
 
 
@@ -165,6 +164,12 @@ namespace StarSystems
                 var starCreator = StarDict[starDefinition.Name];
                 starCreator.OnPSystemReady(LocalSunCB, LocalStarCB, StarTrasform);
                 Debug.Log(starDefinition.Name + " created");
+
+                foreach (PlanetDefinition planet in starDefinition.orbitingBodies)
+                {
+                    Planet.MovePlanet(planet, starDefinition.Name);
+                    Debug.Log(planet.Name + " moved to " + starDefinition.Name);
+                }
             }
 
             //Create starlight controller
