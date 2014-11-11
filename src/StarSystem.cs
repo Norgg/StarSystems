@@ -117,7 +117,7 @@ namespace StarSystems
 
                         Debug.Log("Basis for new stars created");
 
-                        //Planet.CreatePlanet("Duna", "DunaClone", "Dolas", 300, 50000000);
+                        //Planet.ClonePlanet("Duna", "DunaClone", "Dolas", 300, 50000000);
 
                         //PsystemReady trigger
                         PSystemManager.Instance.OnPSystemReady.Add(OnPSystemReady);

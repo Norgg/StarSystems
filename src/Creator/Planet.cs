@@ -8,7 +8,7 @@ namespace StarSystems
 {
     class Planet : MonoBehaviour
     {
-        public static void CreatePlanet(string TemplateName, string Name, string ReferenceBody, int FlightGlobalIndex, double SMA)
+        public static void ClonePlanet(string TemplateName, string Name, string ReferenceBody, int FlightGlobalIndex, double SMA)
         {
             var PlanetClone = (PSystemBody)Instantiate(StarSystem.PSBDict[TemplateName]);
             PlanetClone.children.Clear();
