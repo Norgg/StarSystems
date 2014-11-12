@@ -24,7 +24,7 @@ namespace StarSystems
 
         public static void MovePlanet(PlanetDefinition planet, string targetSystem)
         {
-            if (StarSystem.CBDict.ContainsKey(targetSystem))
+            if (StarSystem.CBDict.ContainsKey(planet.Name))
             {
                 CelestialBody planetCB = StarSystem.CBDict[planet.Name];
                 if (StarSystem.CBDict["Sun"].orbitingBodies.Contains(planetCB))
