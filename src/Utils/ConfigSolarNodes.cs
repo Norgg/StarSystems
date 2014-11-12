@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using StarSystems.Data;
 using UnityEngine;
@@ -44,7 +45,14 @@ namespace StarSystems.Utils
                 }
                 else
                 {
-                    ConfigNode kspNode = GameDatabase.Instance.GetConfigNode("KSPSystem");//system_config.GetNode("KSPSystem");
+                    //ConfigNode kspNode = system_config.GetNode("KSPSystem");
+                    UrlDir.UrlConfig[] kspNodes = GameDatabase.Instance.GetConfigs("KSPSystem");
+                    if (kspNodes.Count() > 1)//TODO: Do something about this...
+                    {
+                        Debug.Log("There shouldn't be more than 1 KSPSystem config! Use ModuleManager to patch the existing config!");
+                        return null;
+                    }
+                    ConfigNode kspNode = kspNodes[0].config;
                     RootDefinition rootDefinition;
                     double sun_solar_mass;
                     SunType sun_solar_type;

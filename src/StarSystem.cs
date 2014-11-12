@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ModuleManager;
 using StarSystems.Creator;
 using StarSystems.Data;
 using StarSystems.Utils;
@@ -39,50 +40,54 @@ namespace StarSystems
             DontDestroyOnLoad(this);
         }
 
-        private void Start()
+        private bool hasStarted = false;
+        private void Update()
         {
-
-            Debug.Log("Ksp Solar System Start");
-            if (ConfigSolarNodes.Instance.IsValid("system"))
+            //Wait for ModuleManager, thanks Ippo
+            if (!hasStarted && MMPatchLoader.Instance.IsReady())
             {
-                kspSystemDefinition = ConfigSolarNodes.Instance.GetConfigData();
-                if (kspSystemDefinition.Stars.Count == 0)
+                Debug.Log("Ksp Solar System Start");
+                hasStarted = true;
+                if (ConfigSolarNodes.Instance.IsValid("system"))
                 {
-                    //kill the mod for bad config
-                    Debug.Log("Mod fall back , no stars found");
-                    kspSystemDefinition = null;
+                    kspSystemDefinition = ConfigSolarNodes.Instance.GetConfigData();
+                    if (kspSystemDefinition.Stars.Count == 0)
+                    {
+                        //kill the mod for bad config
+                        Debug.Log("Mod fall back , no stars found");
+                        kspSystemDefinition = null;
+                    }
+                    else
+                    {
+                        //Load Kerbol
+                        var Kerbol = new StarSystemDefintion();
+                        Kerbol.Name = "Kerbol";
+                        Kerbol.orbit.Inclination = 0;
+                        Kerbol.orbit.Eccentricity = 0;
+                        Kerbol.orbit.SemiMajorAxis = kspSystemDefinition.SemiMajorAxis;
+                        Kerbol.orbit.LAN = 0;
+                        Kerbol.orbit.ArgumentOfPeriapsis = 0;
+                        Kerbol.orbit.MeanAnomalyAtEpoch = 0;
+                        Kerbol.orbit.Epoch = 0;
+                        Kerbol.Mass = 1.7565670E28;
+                        Kerbol.Radius = 261600000d;
+                        Kerbol.FlightGlobalsIndex = 200;
+                        Kerbol.StarColor = PlanetColor.Yellow;
+                        Kerbol.ScienceMultiplier = 1f;
+                        Kerbol.OrignalStar = true;
+                        Kerbol.BodyDescription =
+                            "The Sun is the most well known object in the daytime sky. Scientists have noted a particular burning sensation and potential loss of vision if it is stared at for long periods of time. This is especially important to keep in mind considering the effect shiny objects have on the average Kerbal.";
+                        kspSystemDefinition.Stars.Add(Kerbol);
+                        Debug.Log("Ksp Solar System Defintions loaded");
+                    }
                 }
                 else
                 {
-                    //Load Kerbol
-                    var Kerbol = new StarSystemDefintion();
-                    Kerbol.Name = "Kerbol";
-                    Kerbol.orbit.Inclination = 0;
-                    Kerbol.orbit.Eccentricity = 0;
-                    Kerbol.orbit.SemiMajorAxis = kspSystemDefinition.SemiMajorAxis;
-                    Kerbol.orbit.LAN = 0;
-                    Kerbol.orbit.ArgumentOfPeriapsis = 0;
-                    Kerbol.orbit.MeanAnomalyAtEpoch = 0;
-                    Kerbol.orbit.Epoch = 0;
-                    Kerbol.Mass = 1.7565670E28;
-                    Kerbol.Radius = 261600000d;
-                    Kerbol.FlightGlobalsIndex = 200;
-                    Kerbol.StarColor = PlanetColor.Yellow;
-                    Kerbol.ScienceMultiplier = 1f;
-                    Kerbol.OrignalStar = true;
-                    Kerbol.BodyDescription =
-                        "The Sun is the most well known object in the daytime sky. Scientists have noted a particular burning sensation and potential loss of vision if it is stared at for long periods of time. This is especially important to keep in mind considering the effect shiny objects have on the average Kerbal.";
-                    kspSystemDefinition.Stars.Add(Kerbol);
-                    Debug.Log("Ksp Solar System Defintions loaded");
+                    //kill the mod for bad config
+                    Debug.Log("faild Config for the Mod ,stoped working");
+                    kspSystemDefinition = null;
                 }
             }
-            else
-            {
-                //kill the mod for bad config
-                Debug.Log("faild Config for the Mod ,stoped working");
-                kspSystemDefinition = null;
-            }
-
         }
 
         public void OnLevelWasLoaded(int level)
