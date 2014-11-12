@@ -205,7 +205,13 @@ namespace StarSystems.Utils
                         {
                             if (planet.GetNode("Orbit") != null)
                             {
-                                //TODO: Implement me
+                                planetDef.orbit.ArgumentOfPeriapsis = double.Parse(planet.GetNode("Orbit").GetValue("argumentOfPeriapsis") ?? "0");
+                                planetDef.orbit.Eccentricity = double.Parse(planet.GetNode("Orbit").GetValue("eccentricity") ?? "0");
+                                planetDef.orbit.Epoch = double.Parse(planet.GetNode("Orbit").GetValue("epoch") ?? "0");
+                                planetDef.orbit.Inclination = double.Parse(planet.GetNode("Orbit").GetValue("inclination") ?? "0");
+                                planetDef.orbit.LAN = double.Parse(planet.GetNode("Orbit").GetValue("LAN") ?? "0");
+                                planetDef.orbit.MeanAnomalyAtEpoch = double.Parse(planet.GetNode("Orbit").GetValue("meanAnomalyAtEpoch") ?? "0");
+                                planetDef.orbit.SemiMajorAxis = double.Parse(planet.GetNode("Orbit").GetValue("semiMajorAxis") ?? "0");
                             }
                             else
                             {
