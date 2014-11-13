@@ -61,7 +61,7 @@ namespace StarSystems
                     {
                         //Load Kerbol
                         var Kerbol = new StarSystemDefintion();
-                        Kerbol.Name = "Kerbol";
+                        Kerbol.Name = "Sun";//As much as I would like to name it "Kerbol" keeping the name as "Sun" will maximize mod compatibility
                         Kerbol.orbit.Inclination = 0;
                         Kerbol.orbit.Eccentricity = 0;
                         Kerbol.orbit.SemiMajorAxis = kspSystemDefinition.SemiMajorAxis;
