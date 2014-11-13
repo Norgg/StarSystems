@@ -61,7 +61,7 @@ namespace StarSystems
                     {
                         //Load Kerbol
                         var Kerbol = new StarSystemDefintion();
-                        Kerbol.Name = "Sun";//As much as I would like to name it "Kerbol" keeping the name as "Sun" will maximize mod compatibility
+                        Kerbol.Name = "Kerbol";
                         Kerbol.orbit.Inclination = 0;
                         Kerbol.orbit.Eccentricity = 0;
                         Kerbol.orbit.SemiMajorAxis = kspSystemDefinition.SemiMajorAxis;
@@ -205,6 +205,9 @@ namespace StarSystems
 
             //var OrbitUpdater = new GameObject("OrbitUpdater", typeof(OrbitUpdater));
             //GameObject.DontDestroyOnLoad(OrbitUpdater);
+
+            //As much as I would like to name it "Kerbol" keeping the name as "Sun" will maximize mod compatibility
+            CBDict["Kerbol"].bodyName = "Sun";
         }
     }
 }
