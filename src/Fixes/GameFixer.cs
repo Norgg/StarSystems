@@ -17,7 +17,7 @@ namespace StarSystems.Fixes
         /// </summary>
         void Update()
         {
-            if (HighLogic.LoadedScene == GameScenes.TRACKSTATION || HighLogic.LoadedScene == GameScenes.FLIGHT)
+            if (HighLogic.LoadedScene == GameScenes.SPACECENTER)
             {
                 if (StarSystem.Initialized == false)
                 {
