@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Data\OrbitDefinition.cs" />
     <Compile Include="Data\PlanetDefinition.cs" />
+    <Compile Include="Data\StarColor.cs" />
     <Compile Include="Fixes\OrbitUpdater.cs" />
     <Compile Include="Fixes\NavBallFixer.cs">
       <SubType>Code</SubType>

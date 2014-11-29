@@ -17,6 +17,7 @@ namespace StarSystems
         public static Dictionary<string, CelestialBody> CBDict = new Dictionary<string, CelestialBody>();
         public static Dictionary<string, Transform> TFDict = new Dictionary<string, Transform>();
         public static Dictionary<string, PSystemBody> PSBDict = new Dictionary<string, PSystemBody>();
+        public static Dictionary<string, StarColor> StarColors = new Dictionary<string, StarColor>();
         private static Dictionary<string, Star> StarDict = new Dictionary<string, Star>();
 
         public static List<string> StandardPlanets = new List<string>
@@ -72,7 +73,7 @@ namespace StarSystems
                         Kerbol.Mass = 1.7565670E28;
                         Kerbol.Radius = 261600000d;
                         Kerbol.FlightGlobalsIndex = 200;
-                        Kerbol.StarColor = PlanetColor.Yellow;
+                        Kerbol.StarColor = null;//Use default colors
                         Kerbol.ScienceMultiplier = 1f;
                         Kerbol.OrignalStar = true;
                         Kerbol.BodyDescription =

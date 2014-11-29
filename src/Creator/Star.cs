@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using StarSystems.Data;
 using StarSystems.Utils;
 using UnityEngine;
@@ -89,41 +86,26 @@ namespace StarSystems.Creator
             //Update Corona Ratio
             foreach (var StarCorona in ScaledStar.GetComponentsInChildren<SunCoronas>())
             {
-                var StarCoronaMeshFilter = (MeshFilter) StarCorona.GetComponent(typeof (MeshFilter));
+                var StarCoronaMeshFilter = (MeshFilter)StarCorona.GetComponent(typeof(MeshFilter));
                 MeshScaler.ScaleMesh(StarCoronaMeshFilter.mesh, StarRatio);
             }
-            switch (defintion.StarColor)
+
+            if (defintion.StarColor != null)
             {
-                case PlanetColor.Blue:
-                    //Change to Blue Star
+                ScaledStar.renderer.material.SetColor("_EmitColor0", defintion.StarColor.emitColor0);
+                ScaledStar.renderer.material.SetColor("_EmitColor1", defintion.StarColor.emitColor1);
+                ScaledStar.renderer.material.SetColor("_SunspotColor", defintion.StarColor.sunSpotColor);
+                ScaledStar.renderer.material.SetColor("_RimColor", defintion.StarColor.rimColor);
 
-                    ScaledStar.renderer.material.SetColor("_EmitColor0", new Color(0.357f, 0.588f, 0.405f, 1));
-                    ScaledStar.renderer.material.SetColor("_EmitColor1", new Color(0.139f, 0.061f, 1.0f, 1));
-                    ScaledStar.renderer.material.SetColor("_SunspotColor", new Color(1.0f, 1.0f, 1.0f, 1));
-                    ScaledStar.renderer.material.SetColor("_RimColor", new Color(0.388f, 0.636f, 1.0f, 1.0f));
-
-                    foreach (var StarCorona in ScaledStar.GetComponentsInChildren<SunCoronas>())
-                    {
-                        StarCorona.renderer.material.mainTexture =
-                            GameDatabase.Instance.GetTexture("StarSystems/Resources/BlueStarCorona", false);
-                    }
-                    break;
-                case PlanetColor.Red:
-                    //Change to Red Star
-
-                    ScaledStar.renderer.material.SetColor("_EmitColor0", new Color(0.861f, 0.704f, 0.194f, 1));
-                    ScaledStar.renderer.material.SetColor("_EmitColor1", new Color(0.398f, 0.071f, 1.0f, 1));
-                    ScaledStar.renderer.material.SetColor("_SunspotColor", new Color(0.01f, 0.003f, 0.007f, 1));
-                    ScaledStar.renderer.material.SetColor("_RimColor", new Color(0.626f, 0.231f, 0.170f, 1.0f));
-
-                    foreach (var StarCorona in ScaledStar.GetComponentsInChildren<SunCoronas>())
-                    {
-                        StarCorona.renderer.material.mainTexture =
-                            GameDatabase.Instance.GetTexture("StarSystems/Resources/RedStarCorona", false);
-                    }
-                    break;
+                foreach (var StarCorona in ScaledStar.GetComponentsInChildren<SunCoronas>())
+                {
+                    StarCorona.renderer.material.mainTexture = defintion.StarColor.coronaTexture;
+                }
             }
-
+            else
+            {
+                Debug.Log("StarColor for " + defintion.Name + " is null!");
+            }
         }
     }
 }

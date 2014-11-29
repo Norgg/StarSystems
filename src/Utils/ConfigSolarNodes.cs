@@ -53,6 +53,33 @@ namespace StarSystems.Utils
                         return null;
                     }
                     ConfigNode kspNode = kspNodes[0].config;
+                    try
+                    {
+                        foreach (ConfigNode color in kspNode.GetNode("StarColors").GetNodes("StarColor"))
+                        {
+                            if (color.GetValue("name") != null)
+                            {
+                                StarColor sc = new StarColor();
+                                Vector4 lightColor = ConfigNode.ParseVector4(color.GetValue("LightColor") ?? "0,0,0,0");
+                                sc.lightColor = new Color(lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+                                Vector4 emitColor0 = ConfigNode.ParseVector4(color.GetValue("EmitColor0") ?? "0,0,0,0");
+                                sc.emitColor0 = new Color(emitColor0.x, emitColor0.y, emitColor0.z, emitColor0.w);
+                                Vector4 emitColor1 = ConfigNode.ParseVector4(color.GetValue("EmitColor1") ?? "0,0,0,0");
+                                sc.emitColor1 = new Color(emitColor1.x, emitColor1.y, emitColor1.z, emitColor1.w);
+                                Vector4 sunspotColor = ConfigNode.ParseVector4(color.GetValue("SunspotColor") ?? "0,0,0,0");
+                                sc.sunSpotColor = new Color(sunspotColor.x, sunspotColor.y, sunspotColor.z, sunspotColor.w);
+                                Vector4 rimColor = ConfigNode.ParseVector4(color.GetValue("RimColor") ?? "0,0,0,0");
+                                sc.rimColor = new Color(rimColor.x, rimColor.y, rimColor.z, rimColor.w);
+                                sc.coronaTexture = GameDatabase.Instance.GetTexture(color.GetValue("CoronaTexture") ?? "", false);
+                                StarSystem.StarColors.Add(color.GetValue("name"), sc);
+                                Debug.Log("Added star color " + color.GetValue("name"));
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log("Error loading star colors: " + e);
+                    }
                     RootDefinition rootDefinition;
                     double sun_solar_mass;
                     SunType sun_solar_type;
@@ -120,14 +147,14 @@ namespace StarSystems.Utils
                     }
                     try
                     {
-                        starSystemDefintion.StarColor =
-                            (PlanetColor)
-                                EnumUtilities.Parse(typeof (PlanetColor),
-                                    sun.GetNode("CelestialBody").GetValue("StarColor"));
+                        string color = sun.GetNode("CelestialBody").GetValue("StarColor");
+                        Debug.Log("Setting " + star.name + "'s color to " + color);
+                        starSystemDefintion.StarColor = (StarSystem.StarColors.ContainsKey(color)) ? StarSystem.StarColors[color] : null;
                     }
                     catch (Exception e)
                     {
-                        starSystemDefintion.StarColor = PlanetColor.Yellow;
+                        Debug.Log("failed to set color " + e);
+                        starSystemDefintion.StarColor = null;
                     }
                     try
                     {
