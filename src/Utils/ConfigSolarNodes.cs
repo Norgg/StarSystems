@@ -173,55 +173,9 @@ namespace StarSystems.Utils
                     {
                         starSystemDefintion.ScienceMultiplier = 10f;
                     }
-                    try
-                    {
-                        starSystemDefintion.orbit.Inclination = double.Parse(sun.GetNode("Orbit").GetValue("inclination"));
-                    }
-                    catch (Exception e)
-                    {
-                        starSystemDefintion.orbit.Inclination = 0;
-                    }
-                    try
-                    {
-                        starSystemDefintion.orbit.Eccentricity = double.Parse(sun.GetNode("Orbit").GetValue("eccentricity"));
-                    }
-                    catch (Exception e)
-                    {
-                        starSystemDefintion.orbit.Eccentricity = 0;
-                    }
-                    try
-                    {
-                        starSystemDefintion.orbit.LAN = double.Parse(sun.GetNode("Orbit").GetValue("LAN"));
-                    }
-                    catch (Exception e)
-                    {
-                        starSystemDefintion.orbit.LAN = 0;
-                    }
-                    try
-                    {
-                        starSystemDefintion.orbit.ArgumentOfPeriapsis =
-                            double.Parse(sun.GetNode("Orbit").GetValue("argumentOfPeriapsis"));
-                    }
-                    catch (Exception e)
-                    {
-                        starSystemDefintion.orbit.ArgumentOfPeriapsis = 0;
-                    }
-                    try
-                    {
-                        starSystemDefintion.orbit.MeanAnomalyAtEpoch = double.Parse(sun.GetNode("Orbit").GetValue("meanAnomalyAtEpoch"));
-                    }
-                    catch (Exception e)
-                    {
-                        starSystemDefintion.orbit.MeanAnomalyAtEpoch = 0;
-                    }
-                    try
-                    {
-                        starSystemDefintion.orbit.Epoch = double.Parse(sun.GetNode("Orbit").GetValue("epoch"));
-                    }
-                    catch (Exception e)
-                    {
-                        starSystemDefintion.orbit.Epoch = 0;
-                    }
+
+                    if (sun.GetNode("Orbit") != null)
+                        starSystemDefintion.orbit.loadConfig(sun.GetNode("Orbit"));
 
                     //Planets
                     foreach (ConfigNode planet in star.GetNodes("Planet"))
@@ -231,20 +185,9 @@ namespace StarSystems.Utils
                         if (planetDef.Name != null)
                         {
                             if (planet.GetNode("Orbit") != null)
-                            {
-                                planetDef.orbit.ArgumentOfPeriapsis = double.Parse(planet.GetNode("Orbit").GetValue("argumentOfPeriapsis") ?? "0");
-                                planetDef.orbit.Eccentricity = double.Parse(planet.GetNode("Orbit").GetValue("eccentricity") ?? "0");
-                                planetDef.orbit.Epoch = double.Parse(planet.GetNode("Orbit").GetValue("epoch") ?? "0");
-                                planetDef.orbit.Inclination = double.Parse(planet.GetNode("Orbit").GetValue("inclination") ?? "0");
-                                planetDef.orbit.LAN = double.Parse(planet.GetNode("Orbit").GetValue("LAN") ?? "0");
-                                planetDef.orbit.MeanAnomalyAtEpoch = double.Parse(planet.GetNode("Orbit").GetValue("meanAnomalyAtEpoch") ?? "0");
-                                planetDef.orbit.SemiMajorAxis = double.Parse(planet.GetNode("Orbit").GetValue("semiMajorAxis") ?? "0");
-                            }
+                                planetDef.orbit.loadConfig(planet.GetNode("Orbit"));
                             else
-                            {
-                                planetDef.orbit = null;
                                 Debug.Log(planetDef.Name + " in " + starSystemDefintion.Name + " is missing orbit information, using original");
-                            }
                             starSystemDefintion.orbitingBodies.Add(planetDef);
                         }
                         else
