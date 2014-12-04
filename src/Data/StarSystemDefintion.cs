@@ -28,7 +28,6 @@ namespace StarSystems.Data
         {
                
         }
-        public bool OrignalStar { get; set; }
         public string Name { get; set; }
         public string BodyDescription { get; set; }
         public StarColor StarColor { get; set; }

@@ -60,7 +60,6 @@
     <Compile Include="Creator\CenterRoot.cs" />
     <Compile Include="Creator\Star.cs" />
     <Compile Include="Utils\ConfigSolarNodes.cs" />
-    <Compile Include="Data\Enums.cs" />
     <Compile Include="Data\StarSystemDefintion.cs" />
     <Compile Include="Data\KspSystemDefinition.cs" />
     <Compile Include="Data\RootDefinition.cs" />

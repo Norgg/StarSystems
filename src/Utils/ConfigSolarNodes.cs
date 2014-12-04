@@ -82,7 +82,6 @@ namespace StarSystems.Utils
                     }
                     RootDefinition rootDefinition;
                     double sun_solar_mass;
-                    SunType sun_solar_type;
                     try
                     {
                         sun_solar_mass = double.Parse(kspNode.GetNode("Root").GetValue("SolarMasses")); 
@@ -91,24 +90,8 @@ namespace StarSystems.Utils
                     {
                         sun_solar_mass = 7700;
                     }
-                    try
-                    {
-                        sun_solar_type = ((SunType)int.Parse(kspNode.GetNode("Root").GetValue("Type"))); 
-                    }
-                    catch
-                    {
-                        sun_solar_type = SunType.Blackhole;
-                    }
-                    rootDefinition = new RootDefinition(sun_solar_mass, sun_solar_type);
-                    try
-                    {
-                        kspSystemDefinition = new KspSystemDefinition(rootDefinition,
-                            double.Parse(kspNode.GetNode("Kerbol").GetValue("semiMajorAxis")));
-                    }
-                    catch
-                    {
-                        kspSystemDefinition = new KspSystemDefinition(rootDefinition, 4500000000000);
-                    }
+                    rootDefinition = new RootDefinition(sun_solar_mass);
+                    kspSystemDefinition = new KspSystemDefinition(rootDefinition);
                     kspSystemDefinition.Stars = getStars(kspNode.GetNode("StarSystems").GetNodes("StarSystem"));
                 }
             }
@@ -260,7 +243,7 @@ namespace StarSystems.Utils
             if (system_config.HasNode("KSPSystem"))
             {
                 Debug.Log("Found Master Node.");
-                if (system_config.GetNode("KSPSystem").HasNode("Kerbol") && system_config.GetNode("KSPSystem").HasNode("Root") && system_config.GetNode("KSPSystem").HasNode("StarSystems"))
+                if (system_config.GetNode("KSPSystem").HasNode("Root") && system_config.GetNode("KSPSystem").HasNode("StarSystems"))
                 {
 
                     Debug.Log("Checking for number systems is it 0 mod will close");

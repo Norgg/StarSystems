@@ -58,29 +58,6 @@ namespace StarSystems
                         Debug.Log("Mod fall back , no stars found");
                         kspSystemDefinition = null;
                     }
-                    else
-                    {
-                        //Load Kerbol
-                        var Kerbol = new StarSystemDefintion();
-                        Kerbol.Name = "Kerbol";
-                        Kerbol.orbit.Inclination = 0;
-                        Kerbol.orbit.Eccentricity = 0;
-                        Kerbol.orbit.SemiMajorAxis = kspSystemDefinition.SemiMajorAxis;
-                        Kerbol.orbit.LAN = 0;
-                        Kerbol.orbit.ArgumentOfPeriapsis = 0;
-                        Kerbol.orbit.MeanAnomalyAtEpoch = 0;
-                        Kerbol.orbit.Epoch = 0;
-                        Kerbol.Mass = 1.7565670E28;
-                        Kerbol.Radius = 261600000d;
-                        Kerbol.FlightGlobalsIndex = 200;
-                        Kerbol.StarColor = null;//Use default colors
-                        Kerbol.ScienceMultiplier = 1f;
-                        Kerbol.OrignalStar = true;
-                        Kerbol.BodyDescription =
-                            "The Sun is the most well known object in the daytime sky. Scientists have noted a particular burning sensation and potential loss of vision if it is stared at for long periods of time. This is especially important to keep in mind considering the effect shiny objects have on the average Kerbal.";
-                        kspSystemDefinition.Stars.Add(Kerbol);
-                        Debug.Log("Ksp Solar System Defintions loaded");
-                    }
                 }
                 else
                 {
