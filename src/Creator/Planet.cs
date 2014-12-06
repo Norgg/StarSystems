@@ -36,11 +36,11 @@ namespace StarSystems
                         StarSystem.CBDict[targetSystem].orbitingBodies.Add(planetCB);
                         if (planet.orbit != null)
                             planetCB.orbitDriver.orbit = planet.orbit.getOrbit(StarSystem.CBDict[targetSystem]);
-                        else
-                            planetCB.orbitDriver.orbit.referenceBody = StarSystem.CBDict[targetSystem];
-                        planetCB.CBUpdate();
+                        planetCB.orbitDriver.referenceBody = StarSystem.CBDict[targetSystem];
+                        planetCB.orbitDriver.UpdateOrbit();
                         StarSystem.CBDict["Sun"].CBUpdate();
                         StarSystem.CBDict[targetSystem].CBUpdate();
+                        Debug.Log(planet.Name + " moved to " + targetSystem);
                     }
                     else
                     {

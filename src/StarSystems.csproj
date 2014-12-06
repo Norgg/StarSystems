@@ -54,7 +54,6 @@
     <Compile Include="Fixes\GameFixer.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utils\MoveStandardPlanets.cs" />
     <Compile Include="Creator\Planet.cs" />
     <Compile Include="Utils\PSystemBodies.cs" />
     <Compile Include="Creator\CenterRoot.cs" />

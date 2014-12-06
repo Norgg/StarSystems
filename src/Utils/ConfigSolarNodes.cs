@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
 using StarSystems.Data;
 using UnityEngine;
 
@@ -159,6 +157,8 @@ namespace StarSystems.Utils
 
                     if (sun.GetNode("Orbit") != null)
                         starSystemDefintion.orbit.loadConfig(sun.GetNode("Orbit"));
+                    else
+                        starSystemDefintion.orbit = null;
 
                     //Planets
                     foreach (ConfigNode planet in star.GetNodes("Planet"))
@@ -168,9 +168,15 @@ namespace StarSystems.Utils
                         if (planetDef.Name != null)
                         {
                             if (planet.GetNode("Orbit") != null)
+                            {
                                 planetDef.orbit.loadConfig(planet.GetNode("Orbit"));
+                            }
                             else
+                            {
+                                planetDef.orbit = null;
                                 Debug.Log(planetDef.Name + " in " + starSystemDefintion.Name + " is missing orbit information, using original");
+                            }
+
                             starSystemDefintion.orbitingBodies.Add(planetDef);
                         }
                         else

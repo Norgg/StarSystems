@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using StarSystems.Creator;
+using StarSystems.Data;
 using UnityEngine;
-using StarSystems.Utils;
 
 namespace StarSystems.Fixes
 {
@@ -19,9 +16,9 @@ namespace StarSystems.Fixes
         {
             if (HighLogic.LoadedScene == GameScenes.SPACECENTER)
             {
-                if (StarSystem.Initialized == false)
+                if (!StarSystem.Initialized)
                 {
-                    MoveStandardPlanets.MoveToKerbol();
+                    StarSystem.Initialized = true;
 
                     var PatchedSaveGames = ConfigNode.Load("GameData/StarSystems/Config/PatchedSaveGames.cfg");
                         
@@ -29,25 +26,18 @@ namespace StarSystems.Fixes
                     {
                         PatchedSaveGames.GetNode("PatchedSaveGames").AddValue(HighLogic.CurrentGame.Title, "Patched");
                         PatchedSaveGames.Save("GameData/StarSystems/Config/PatchedSaveGames.cfg");
-                        StarSystem.NeedsPatching = true;
+                        foreach (var Vessel in FlightGlobals.Vessels)
+                        {
+                            if (Vessel.orbitDriver.orbit.referenceBody == StarSystem.CBDict["Sun"])
+                            {
+                                Debug.Log("Patching " + Vessel.name);
+                                Vessel.orbitDriver.referenceBody = StarSystem.CBDict["Kerbol"];
+                                Vessel.orbitDriver.UpdateOrbit();
+                                Debug.Log(Vessel.name + "Patched");
+                            }
+                        }
                     }
                 }
-            }
-
-            if (StarSystem.NeedsPatching == true && FlightGlobals.Vessels.Count != 0)
-            {
-                foreach (var Vessel in FlightGlobals.Vessels)
-                {
-                    if (Vessel.orbitDriver.orbit.referenceBody == StarSystem.CBDict["Sun"])
-                    {
-                        Debug.Log("Patching " + Vessel.name);
-                        Vessel.orbitDriver.referenceBody = StarSystem.CBDict["Kerbol"];
-                        Vessel.orbitDriver.UpdateOrbit();
-                        Debug.Log(Vessel.name + "Patched");
-                    }
-                }
-
-                StarSystem.NeedsPatching = false;
             }
         }
     }

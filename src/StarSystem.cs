@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using ModuleManager;
 using StarSystems.Creator;
 using StarSystems.Data;
@@ -18,23 +15,10 @@ namespace StarSystems
         public static Dictionary<string, Transform> TFDict = new Dictionary<string, Transform>();
         public static Dictionary<string, PSystemBody> PSBDict = new Dictionary<string, PSystemBody>();
         public static Dictionary<string, StarColor> StarColors = new Dictionary<string, StarColor>();
-        private static Dictionary<string, Star> StarDict = new Dictionary<string, Star>();
+        public static Dictionary<string, Star> StarDict = new Dictionary<string, Star>();
 
-        public static List<string> StandardPlanets = new List<string>
-        {
-            "Moho",
-            "Eve",
-            "Kerbin",
-            "Duna",
-            "Dres",
-            "Jool",
-            "Eeloo"
-        };
-
-        private ConfigNode StarNames;
         private KspSystemDefinition kspSystemDefinition;
         public static bool Initialized = false;
-        public static bool NeedsPatching = false;
 
         private void Awake()
         {
@@ -110,10 +94,7 @@ namespace StarSystems
                         //Set sun to Kerbol when loading space center
                         break;
                     case 2://main menu
-                        if (Initialized == true)
-                        {
-                            MoveStandardPlanets.MoveToSun();
-                        }
+                        Initialized = false;
                         break;
                         
                 }
@@ -147,11 +128,9 @@ namespace StarSystems
                 var starCreator = StarDict[starDefinition.Name];
                 starCreator.OnPSystemReady(LocalSunCB, LocalStarCB, StarTrasform);
                 Debug.Log(starDefinition.Name + " created");
-
                 foreach (PlanetDefinition planet in starDefinition.orbitingBodies)
                 {
                     Planet.MovePlanet(planet, starDefinition.Name);
-                    Debug.Log(planet.Name + " moved to " + starDefinition.Name);
                 }
             }
 
