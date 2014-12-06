@@ -94,6 +94,7 @@
 
 xcopy /Y /I $(TargetFileName) "$(SolutionDir)GameData\StarSystems\Plugins"
 xcopy /S /Y "$(SolutionDir)GameData" "%25KSPDIR%25\GameData"
+del "$(SolutionDir)StarSystems.zip"
 7za a -tzip "$(SolutionDir)StarSystems.zip" "$(SolutionDir)GameData" 2&gt; NUL
 if %25ERRORLEVEL%25==9009 (
   echo 7za not found, mod not packaged
