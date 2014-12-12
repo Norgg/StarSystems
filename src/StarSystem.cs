@@ -137,6 +137,7 @@ namespace StarSystems
             //Create starlight controller
             var StarLightSwitcherObj = new GameObject("StarLightSwitcher", typeof (StarLightSwitcher));
             GameObject.DontDestroyOnLoad(StarLightSwitcherObj);
+            StarLightSwitcherObj.GetComponent<StarLightSwitcher>().AddStar(CBDict["Sun"], kspSystemDefinition.Root.color);
             foreach (string StarName in StarDict.Keys)
             {
 

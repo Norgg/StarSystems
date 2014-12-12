@@ -88,7 +88,10 @@ namespace StarSystems.Utils
                     {
                         sun_solar_mass = 7700;
                     }
-                    rootDefinition = new RootDefinition(sun_solar_mass);
+                    string rootColor = kspNode.GetNode("Root").GetValue("StarColor") ?? "";
+                    Debug.Log("Setting the root's color to " + rootColor);
+                    StarColor blackHoleColor = (StarSystem.StarColors.ContainsKey(rootColor)) ? StarSystem.StarColors[rootColor] : null;
+                    rootDefinition = new RootDefinition(sun_solar_mass, blackHoleColor);
                     kspSystemDefinition = new KspSystemDefinition(rootDefinition);
                     kspSystemDefinition.Stars = getStars(kspNode.GetNode("StarSystems").GetNodes("StarSystem"));
                 }

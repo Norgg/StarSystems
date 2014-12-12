@@ -54,10 +54,10 @@ namespace StarSystems.Creator
             OriginalSun.CBUpdate();
 
             //Make Sun Black
-            ScaledSun.renderer.material.SetColor("_EmitColor0", new Color(0.0f, 0.0f, 0.0f, 1));
-            ScaledSun.renderer.material.SetColor("_EmitColor1", new Color(0.0f, 0.0f, 0.0f, 1));
-            ScaledSun.renderer.material.SetColor("_SunspotColor", new Color(0.0f, 0.0f, 0.0f, 1));
-            ScaledSun.renderer.material.SetColor("_RimColor", new Color(0.0f, 0.0f, 0.0f, 1.0f));
+            ScaledSun.renderer.material.SetColor("_EmitColor0", Root.color.emitColor0);
+            ScaledSun.renderer.material.SetColor("_EmitColor1", Root.color.emitColor1);
+            ScaledSun.renderer.material.SetColor("_SunspotColor", Root.color.sunSpotColor);
+            ScaledSun.renderer.material.SetColor("_RimColor", Root.color.rimColor);
 
             //Update Sun Scale
             var ScaledSunMeshFilter = (MeshFilter)ScaledSun.GetComponent(typeof(MeshFilter));
@@ -68,8 +68,7 @@ namespace StarSystems.Creator
             //Change Sun Corona
             foreach (var SunCorona in ScaledSun.GetComponentsInChildren<SunCoronas>())
             {
-                SunCorona.renderer.material.mainTexture =
-                    GameDatabase.Instance.GetTexture("StarSystems/Resources/BlackHoleCorona", false);
+                SunCorona.renderer.material.mainTexture = Root.color.coronaTexture;
                 var SunCoronaMeshFilter = (MeshFilter)SunCorona.GetComponent(typeof(MeshFilter));
                 MeshScaler.ScaleMesh(SunCoronaMeshFilter.mesh, SunRatio);
             }
