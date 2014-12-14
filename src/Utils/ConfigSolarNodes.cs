@@ -58,6 +58,7 @@ namespace StarSystems.Utils
                             if (color.GetValue("name") != null)
                             {
                                 StarColor sc = new StarColor();
+                                sc.givesOffLight = (color.GetValue("GivesOffLight") ?? "true") == "true";
                                 Vector4 lightColor = ConfigNode.ParseVector4(color.GetValue("LightColor") ?? "0,0,0,0");
                                 sc.lightColor = new Color(lightColor.x, lightColor.y, lightColor.z, lightColor.w);
                                 Vector4 emitColor0 = ConfigNode.ParseVector4(color.GetValue("EmitColor0") ?? "0,0,0,0");

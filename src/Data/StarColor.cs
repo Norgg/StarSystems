@@ -5,6 +5,7 @@ namespace StarSystems.Data
     public class StarColor
     {
         public string name;
+        public bool givesOffLight;
         public Color lightColor;
         public Color emitColor0;
         public Color emitColor1;

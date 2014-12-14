@@ -92,6 +92,7 @@ namespace StarSystems
                         break;
                     case 5://space center
                         //Set sun to Kerbol when loading space center
+                        StarLightSwitcher.setSun(CBDict["Kerbol"]);
                         break;
                     case 2://main menu
                         Initialized = false;

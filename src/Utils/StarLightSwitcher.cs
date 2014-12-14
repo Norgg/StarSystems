@@ -31,30 +31,39 @@ namespace StarSystems.Utils
                     DistanceStar = FlightGlobals.getAltitudeAtPos(position, Sun.Instance.sun);
                     if (DistanceCB < DistanceStar && Sun.Instance.sun != CB)
                     {
-                        //Set star as active star
-                        Sun.Instance.sun = CB;
-                        Planetarium.fetch.Sun = CB;
-                        Debug.Log("Active sun set to: " + CB.name);
-
-                        //Set sunflare color
-                        if (StarDistance[CB] != null)
-                        {
-                            Sun.Instance.sunFlare.color = StarDistance[CB].lightColor;
-                        }
-                        else
-                        {
-                            Sun.Instance.sunFlare.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-                        }
-
-                        //Reset solar panels (Credit to Kcreator)
-                        foreach (ModuleDeployableSolarPanel panel in FindObjectsOfType(typeof(ModuleDeployableSolarPanel)))
-                        {
-                            panel.OnStart(PartModule.StartState.Orbital);
-                        }
+                        setSun(CB);
                     }
                 }
             }
         }
+
+        public static void setSun(CelestialBody CB)
+        {
+            if (StarDistance[CB] != null)
+            {
+                if (!StarDistance[CB].givesOffLight)
+                    return;
+            }
+            //Set star as active star
+            Sun.Instance.sun = CB;
+            Planetarium.fetch.Sun = CB;
+            Debug.Log("Active sun set to: " + CB.name);
+
+            //Set sunflare color
+            if (StarDistance[CB] != null)
+            {
+                Sun.Instance.sunFlare.color = StarDistance[CB].lightColor;
+            }
+            else
+            {
+                Sun.Instance.sunFlare.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            }
+
+            //Reset solar panels (Credit to Kcreator)
+            foreach (ModuleDeployableSolarPanel panel in FindObjectsOfType(typeof(ModuleDeployableSolarPanel)))
+            {
+                panel.OnStart(PartModule.StartState.Orbital);
+            }
+        }
     }
-    
 }
