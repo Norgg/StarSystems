@@ -33,8 +33,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ModuleManager.2.5.3">
-      <HintPath>..\GameData\ModuleManager.2.5.3.dll</HintPath>
+    <Reference Include="ModuleManager.2.5.4">
+      <HintPath>..\GameData\ModuleManager.2.5.4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

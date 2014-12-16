@@ -60,7 +60,7 @@ namespace StarSystems
 
                 switch (level)
                 {
-                    case 10://prerender before main menu
+                    case 9://prerender before main menu
                         PlanetariumCamera.fetch.maxDistance = 5000000000;
                         Debug.Log("Creating basis for new stars...");
 
