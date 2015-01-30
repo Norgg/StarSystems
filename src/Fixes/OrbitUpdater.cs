@@ -10,12 +10,9 @@ namespace StarSystems.Fixes
     {
         void Update()
         {
-            if (FlightGlobals.ActiveVessel != null)
+            foreach (var Orb in Planetarium.Orbits)
             {
-                foreach (var Orb in Planetarium.Orbits)
-                {
-                    Orb.UpdateOrbit();
-                }
+                Orb.UpdateOrbit();
             }
         }
     }
