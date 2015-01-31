@@ -10,10 +10,11 @@ namespace StarSystems.Fixes
     {
         void Update()
         {
-            foreach (var Orb in Planetarium.Orbits)
-            {
-                Orb.UpdateOrbit();
-            }
+			if (StarSystem.Initialized) {
+				foreach (var Orb in Planetarium.Orbits) {
+					Orb.UpdateOrbit ();
+				}
+			}
         }
     }
 }
