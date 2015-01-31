@@ -7,7 +7,7 @@ namespace StarSystems.Creator
     public class Star
     {
         private StarSystemDefintion defintion;
-        public Star(StarSystemDefintion star, PSystemBody InternalStarPSB,PSystemBody InternalSunPSB)
+        public Star(StarSystemDefintion star, PSystemBody InternalStarPSB, PSystemBody InternalSunPSB)
         {
             defintion = star;
             var InternalStarCB = InternalStarPSB.celestialBody;

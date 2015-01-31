@@ -94,6 +94,8 @@ namespace StarSystems
                         //Set sun to Kerbol when loading space center
                         StarLightSwitcher.setSun(CBDict["Kerbol"]);
                         break;
+					case 6: // VAB/SPH
+						break;
                     case 2://main menu
                         Initialized = false;
                         break;
@@ -151,19 +153,21 @@ namespace StarSystems
             Debug.Log("Starlight controller created");
 
             //Create Navball fixer
-            var NavBallFixerObj = new GameObject("NavBallFixer", typeof (NavBallFixer));
-            GameObject.DontDestroyOnLoad(NavBallFixerObj);
+            var navBallFixerObj = new GameObject("NavBallFixer", typeof (NavBallFixer));
+            GameObject.DontDestroyOnLoad(navBallFixerObj);
 
             Debug.Log("Navball fixer created");
 
             //Create Vessel fixer
-            var VesselFixerObj = new GameObject("SaveGameFixer", typeof (GameFixer));
-            GameObject.DontDestroyOnLoad(VesselFixerObj);
+            var vesselFixerObj = new GameObject("SaveGameFixer", typeof (GameFixer));
+            GameObject.DontDestroyOnLoad(vesselFixerObj);
 
             Debug.Log("Vessel fixer created");
 
-            //var OrbitUpdater = new GameObject("OrbitUpdater", typeof(OrbitUpdater));
-            //GameObject.DontDestroyOnLoad(OrbitUpdater);
+            var orbitUpdater = new GameObject("OrbitUpdater", typeof(OrbitUpdater));
+			GameObject.DontDestroyOnLoad(orbitUpdater);
+
+			Debug.Log("Orbit updater created");
 
             //As much as I would like to name it "Kerbol" keeping the name as "Sun" will maximize mod compatibility
             CBDict["Kerbol"].bodyName = "Sun";

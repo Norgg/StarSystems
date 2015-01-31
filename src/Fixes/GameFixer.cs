@@ -26,14 +26,14 @@ namespace StarSystems.Fixes
                     {
                         PatchedSaveGames.GetNode("PatchedSaveGames").AddValue(HighLogic.CurrentGame.Title, "Patched");
                         PatchedSaveGames.Save("GameData/StarSystems/Config/PatchedSaveGames.cfg");
-                        foreach (var Vessel in FlightGlobals.Vessels)
+                        foreach (var vessel in FlightGlobals.Vessels)
                         {
-                            if (Vessel.orbitDriver.orbit.referenceBody == StarSystem.CBDict["Sun"])
+                            if (vessel.orbitDriver.orbit.referenceBody == StarSystem.CBDict["Sun"])
                             {
-                                Debug.Log("Patching " + Vessel.name);
-                                Vessel.orbitDriver.referenceBody = StarSystem.CBDict["Kerbol"];
-                                Vessel.orbitDriver.UpdateOrbit();
-                                Debug.Log(Vessel.name + "Patched");
+                                Debug.Log("Patching " + vessel.name);
+                                vessel.orbitDriver.referenceBody = StarSystem.CBDict["Kerbol"];
+                                vessel.orbitDriver.UpdateOrbit();
+                                Debug.Log(vessel.name + "Patched");
                             }
                         }
                     }
