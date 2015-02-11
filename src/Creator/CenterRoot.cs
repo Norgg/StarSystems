@@ -1,6 +1,6 @@
-﻿using System;
-using StarSystems.Data;
+﻿using StarSystems.Data;
 using StarSystems.Utils;
+using System;
 using UnityEngine;
 
 namespace StarSystems.Creator
@@ -29,12 +29,7 @@ namespace StarSystems.Creator
             Debug.Log("Altering sun...");
 
             //Set Original Sun Parameters
-            double SolarMasses;
-
-
-            SolarMasses = Root.SolarMasses;
-
-            OriginalSun.Mass = SolarMasses * OriginalSun.Mass;
+            OriginalSun.Mass = Root.SolarMasses * OriginalSun.Mass;
             OriginalSun.Radius = (2 * (6.674E-11) * OriginalSun.Mass) / (Math.Pow(299792458, 2.0));
             OriginalSun.GeeASL = OriginalSun.Mass * (6.674E-11 / 9.81) / Math.Pow(OriginalSun.Radius, 2.0);
             OriginalSun.gMagnitudeAtCenter = OriginalSun.GeeASL * 9.81 * Math.Pow(OriginalSun.Radius, 2.0);

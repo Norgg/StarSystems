@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace StarSystems.Data
 {
@@ -26,7 +23,7 @@ namespace StarSystems.Data
 
         public StarSystemDefintion()
         {
-               
+
         }
         public string Name { get; set; }
         public string BodyDescription { get; set; }

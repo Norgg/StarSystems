@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace StarSystems.Data
 {
@@ -18,9 +15,8 @@ namespace StarSystems.Data
             this.Root = Root;
             this.Stars = Stars;
         }
-        public List<StarSystemDefintion> Stars { get; set; }
+        public List<StarSystemDefintion> Stars { get; set;  }
         public RootDefinition Root { get; set; }
     }
 
-    
 }

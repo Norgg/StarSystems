@@ -1,7 +1,7 @@
-﻿using System;
+﻿using StarSystems.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using StarSystems.Data;
 using UnityEngine;
 
 namespace StarSystems.Utils
@@ -43,7 +43,6 @@ namespace StarSystems.Utils
                 }
                 else
                 {
-                    //ConfigNode kspNode = system_config.GetNode("KSPSystem");
                     UrlDir.UrlConfig[] kspNodes = GameDatabase.Instance.GetConfigs("KSPSystem");
                     if (kspNodes.Count() > 1)//TODO: Do something about this...
                     {
@@ -83,7 +82,7 @@ namespace StarSystems.Utils
                     double sun_solar_mass;
                     try
                     {
-                        sun_solar_mass = double.Parse(kspNode.GetNode("Root").GetValue("SolarMasses")); 
+                        sun_solar_mass = double.Parse(kspNode.GetNode("Root").GetValue("SolarMasses"));
                     }
                     catch
                     {
@@ -120,7 +119,7 @@ namespace StarSystems.Utils
                     {
                         starSystemDefintion.BodyDescription = sun.GetNode("CelestialBody").GetValue("BodyDescription");
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                     }
 
@@ -128,7 +127,7 @@ namespace StarSystems.Utils
                     {
                         starSystemDefintion.Radius = double.Parse(sun.GetNode("CelestialBody").GetValue("Radius"));
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         starSystemDefintion.Radius = 261600000;
                     }
@@ -147,7 +146,7 @@ namespace StarSystems.Utils
                     {
                         starSystemDefintion.Mass = double.Parse(sun.GetNode("CelestialBody").GetValue("Mass"));
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         starSystemDefintion.Mass = 1.7565670E28;
                     }
@@ -156,7 +155,7 @@ namespace StarSystems.Utils
                         starSystemDefintion.ScienceMultiplier =
                             float.Parse(sun.GetNode("CelestialBody").GetValue("ScienceMultiplier"));
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         starSystemDefintion.ScienceMultiplier = 10f;
                     }
@@ -243,7 +242,7 @@ namespace StarSystems.Utils
                 Debug.Log("No Config File listed");
                 return false;
             }
-            system_config = ConfigNode.Load(string.Format("GameData/StarSystems/Config/{0}.cfg",configname));
+            system_config = ConfigNode.Load(string.Format("GameData/StarSystems/Config/{0}.cfg", configname));
             Debug.Log(system_config);
             Debug.Log(string.Format("Config Loading. GameData/StarSystems/Config/{0}.cfg", configname));
             if (!system_config.HasData)
